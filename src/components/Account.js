@@ -7,10 +7,22 @@ const Account = (props) => {
 
   const handleClick = (e) => {
     e.preventDefault()
-    if (isNaN(amount)) {
+    if (isNaN(amount) || ((amount) < 0)) {
       console.log('Not a number')
     } else {
       setBalance(balance + Number(amount))
+    }
+    setAmount(0)
+  }
+
+  const withdrawClick = (e) => {
+    e.preventDefault()
+    if (isNaN(amount) || ((amount) < 0)) {
+      console.log('Not a number')
+    } else if (Number(amount) > balance) {
+      alert('Not enough funds')
+    } else {
+      setBalance(balance - Number(amount))
     }
     setAmount(0)
   }
@@ -41,9 +53,16 @@ const Account = (props) => {
           value="Deposit"
           onClick={handleClick}
         />
+        <input
+          className="btn"
+          type="submit"
+          value="Withdraw"
+          onClick={withdrawClick}
+        />
       </div>
     </div>
   )
+
 }
 
 export default Account
